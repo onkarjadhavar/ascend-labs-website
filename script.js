@@ -221,25 +221,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // Universal click listener across buttons, cards, pills, and links
   document.addEventListener('click', (e) => {
     // Check if clicked element or parent is an action trigger
-    const trigger = e.target.closest('[data-select-domain], a[href^="#contact"], a[href^="#apply"], a[href^="#quote"], a[href^="#subscribe"], a[href^="#enquiry"], .domain-card, .quick-domain-pill, .hero-quad-card');
+    const trigger = e.target.closest('[data-select-domain], a[href^="#contact"], a[href^="#apply"], a[href^="#quote"], a[href^="#subscribe"], a[href^="#enquiry"], .domain-card, .quick-domain-pill');
     if (!trigger) return;
 
-    // If user clicked an internal subpage link inside a card (e.g. "View syllabus ->"), let it navigate normally
-    const explicitSubpageLink = e.target.closest('a');
-    if (explicitSubpageLink && explicitSubpageLink !== trigger && !explicitSubpageLink.getAttribute('href')?.startsWith('#')) {
+    // If user clicked an internal subpage link inside a card (e.g. "View syllabus ->" or dedicated subpage link), let it navigate normally
+    const link = e.target.closest('a') || (trigger.tagName.toLowerCase() === 'a' ? trigger : null);
+    if (link && link.getAttribute('href') && !link.getAttribute('href').startsWith('#') && !link.getAttribute('href').includes('#')) {
       return;
     }
 
-    const href = trigger.getAttribute('href') || trigger.querySelector('a')?.getAttribute('href') || '#contact';
-    const domainVal = trigger.getAttribute('data-select-domain') || trigger.getAttribute('data-domain') || '';
+    const href = trigger.getAttribute('href') || trigger.querySelector('a')?.getAttribute('href') || (document.querySelector('#apply') ? '#apply' : '#contact');
+    if (!href || !href.includes('#')) {
+      return;
+    }
 
+    const domainVal = trigger.getAttribute('data-select-domain') || trigger.getAttribute('data-domain') || '';
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const hrefParts = href.split('#');
     const isSamePage = href.startsWith('#') || hrefParts[0] === '' || hrefParts[0] === currentPath;
 
     if (isSamePage) {
       e.preventDefault();
-      const targetHash = hrefParts[1] ? ('#' + hrefParts[1]) : '#contact';
+      const targetHash = hrefParts[1] ? ('#' + hrefParts[1]) : (document.querySelector('#apply') ? '#apply' : '#contact');
       triggerApplicationInterface(targetHash, domainVal);
       if (history.pushState) {
         history.pushState(null, null, targetHash);
