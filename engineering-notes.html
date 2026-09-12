@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Engineering revision notes and unit outlines for DBATU and SPPU university students by Ascend Labs. Curated by student builders for clear conceptual understanding." />
+    <title>Engineering Notes Hub (DBATU & SPPU) | Ascend Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Ascend Labs home"><span class="brand-symbol">A</span><span data-config="brandName">ASCEND<span class="muted">LABS</span></span></a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="internship.html">Internship</a>
+        <a href="campus-ambassador.html">Ambassadors</a>
+        <a href="web-development.html">Services</a>
+        <a href="engineering-notes.html">Notes Hub</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="button button-small nav-cta" href="#subscribe" data-select-domain="Engineering Notes">Join update list <span>↗</span></a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </header>
+
+    <main id="main">
+      <section class="subpage-hero subpage-hero-dark section-shell">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a> <span>/</span>
+          <a href="index.html#notes">Knowledge Hub</a> <span>/</span>
+          <span>Engineering Notes</span>
+        </div>
+        <p class="eyebrow"><span class="status-dot"></span> 04 / KNOWLEDGE HUB</p>
+        <h1>Engineering notes that help<br />you actually <em>understand.</em></h1>
+        <p class="hero-text">We are organizing clean, conceptual revision guides, formula summaries, and unit-by-unit roadmaps for engineering students. Our first collections focus on DBATU and SPPU university syllabi.</p>
+        
+        <div class="meta-badges">
+          <span class="badge badge-dark">UNIVERSITIES: DBATU & SPPU</span>
+          <span class="badge badge-dark">FORMAT: UNIT-WISE CONVERSATIONAL REVISION</span>
+          <span class="badge badge-orange">STATUS: CURATING & PEER-VERIFYING</span>
+        </div>
+
+        <div class="hero-actions" style="margin-top: 24px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+          <a class="button" href="#subscribe" data-select-domain="Engineering Notes">Get notes updates <span>↗</span></a>
+          <a class="text-link" href="#notes-hub" style="color: var(--muted-lime);">Browse subjects <span>↓</span></a>
+        </div>
+      </section>
+
+      <!-- Interactive Filtering & Notes Hub -->
+      <section id="notes-hub" class="section-shell notes-hub-shell">
+        <!-- University Switcher -->
+        <div class="university-toggle-bar">
+          <span style="font-family: var(--mono); font-size: 11px; color: #45605b; margin-right: 8px;">SELECT UNIVERSITY:</span>
+          <button class="univ-tab active" data-univ="dbatu">DBATU (Lonere)</button>
+          <button class="univ-tab" data-univ="sppu">SPPU (Pune)</button>
+        </div>
+
+        <!-- Filter Suite -->
+        <div class="filter-row">
+          <select id="notes-branch-filter" class="filter-select" aria-label="Filter by branch">
+            <option value="all">All Engineering Branches</option>
+            <option value="comp">Computer Engineering</option>
+            <option value="it">Information Technology</option>
+            <option value="mech">Mechanical Engineering</option>
+            <option value="civil">Civil Engineering</option>
+            <option value="entc">Electronics & Telecommunication</option>
+            <option value="aids">AI & Data Science</option>
+          </select>
+
+          <select id="notes-sem-filter" class="filter-select" aria-label="Filter by semester">
+            <option value="all">All Semesters</option>
+            <option value="sem1">Semester 1 (FE)</option>
+            <option value="sem2">Semester 2 (FE)</option>
+            <option value="sem3">Semester 3 (SE)</option>
+            <option value="sem4">Semester 4 (SE)</option>
+            <option value="sem5">Semester 5 (TE)</option>
+            <option value="sem6">Semester 6 (TE)</option>
+            <option value="sem7">Semester 7 (BE)</option>
+            <option value="sem8">Semester 8 (BE)</option>
+          </select>
+
+          <input type="text" id="notes-search-input" class="search-input" placeholder="Search by subject name or code (e.g. Data Structures, BTCOC301)..." aria-label="Search subjects" />
+        </div>
+
+        <!-- Status & Results Count Banner -->
+        <div class="notes-status-banner">
+          <div>
+            <p><strong>Status:</strong> Revision roadmaps are currently in peer-review with student contributors. Click <em>Join update list</em> to receive the verified PDF summaries as each unit drops.</p>
+          </div>
+          <span id="notes-result-count" style="font-family: var(--mono); font-size: 11px; color: var(--ink); white-space: nowrap; font-weight: bold;">Loading subjects...</span>
+        </div>
+
+        <!-- Dynamic Cards Grid -->
+        <div id="notes-cards-container" class="notes-cards-grid">
+          <!-- Populated by script.js -->
+        </div>
+
+        <!-- Clean Empty State -->
+        <div id="notes-empty-state" class="empty-state" style="display: none;">
+          <span style="font-size: 32px; color: var(--orange);">✦</span>
+          <h3>Notes are being organized.</h3>
+          <p>We are actively structuring and peer-verifying notes for this branch and semester. Join the update list to get notified the moment they are released.</p>
+          <a href="#subscribe" class="button button-small" data-select-domain="Engineering Notes">Notify me for this subject <span>↓</span></a>
+        </div>
+      </section>
+
+      <!-- Academic Integrity & Copyright Notice -->
+      <section class="section-shell" style="padding-top: 60px; padding-bottom: 70px; background: #ebe9e2;">
+        <div class="two-col-block" style="margin-top: 0;">
+          <div>
+            <p class="eyebrow">OUR CURATION PHILOSOPHY</p>
+            <h2>Built by students,<br />engineered for clarity.</h2>
+            <p style="color: #45605b; font-size: 13px; line-height: 1.7; margin-top: 14px;">Most university engineering notes are dense, poorly scanned photocopies of rushed blackboard lectures. We approach notes differently: clear mental models, visual diagrams, code walkthroughs, and step-by-step problem formulations.</p>
+          </div>
+
+          <div style="background: #f8f8f2; border: 1px solid var(--line); padding: 24px 26px;">
+            <p class="eyebrow" style="color: var(--orange); margin-bottom: 10px;">ACADEMIC INTEGRITY & RESPECT FOR COPYRIGHT</p>
+            <p style="font-size: 12px; line-height: 1.7; color: #45605b; margin: 0;">
+              <strong>Ascend Labs</strong> curates independent, student-authored conceptual revision guides and study roadmaps. We do not host, distribute, or claim ownership of proprietary university question papers, textbook scans, or copyrighted institutional materials. All educational references remain the intellectual property of their respective authors and universities.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Update Subscription Form Area -->
+      <section id="subscribe" class="contact section-shell">
+        <div class="contact-copy">
+          <p class="eyebrow">NEVER MISS A UNIT DROP</p>
+          <h2>Get notified when your<br />semester notes release.</h2>
+          <p>Select your university and branch. We will email you direct links as verified revision packets and cheat sheets are published.</p>
+          <p class="contact-note">The company will start with two founders and grow a capable team across technology, design, campus outreach, and client success.</p>
+        </div>
+
+        <form id="interest-form" class="contact-form" novalidate>
+          <label>Your name <span class="req">*</span>
+            <input required name="name" placeholder="Enter your full name" />
+            <span class="field-error-msg"></span>
+          </label>
+
+          <label>Email address <span class="req">*</span>
+            <input required type="email" name="email" placeholder="you@example.com" />
+            <span class="field-error-msg"></span>
+          </label>
+
+          <label>Phone / WhatsApp <span class="muted">(optional for PDF notification)</span>
+            <input type="tel" name="phone" placeholder="+91 98765 43210" />
+            <span class="field-error-msg"></span>
+          </label>
+
+          <label>I am interested in <span class="req">*</span>
+            <select required name="interest">
+              <option value="Engineering Notes" selected>Engineering Notes (DBATU / SPPU)</option>
+              <optgroup label="1-Month IT Internship Domains">
+                <option value="Internship: Web Development">Internship: Web Development</option>
+                <option value="Internship: Python Programming">Internship: Python Programming</option>
+                <option value="Internship: Java Development">Internship: Java Development</option>
+                <option value="Internship: Data Science & ML">Internship: Data Science & ML</option>
+                <option value="Internship: UI/UX & Frontend">Internship: UI/UX & Frontend</option>
+                <option value="Internship: Cloud & DevOps">Internship: Cloud & DevOps</option>
+                <option value="Internship Program">General IT Internship</option>
+              </optgroup>
+              <optgroup label="Other Programs & Services">
+                <option value="College Ambassador Program">College Ambassador Program</option>
+                <option value="Website Development">Website Development (For Businesses)</option>
+              </optgroup>
+            </select>
+            <span class="field-error-msg"></span>
+          </label>
+
+          <div id="college-field-group" class="field-group conditional-field active">
+            <label>University, College & Branch <span class="req">*</span>
+              <input required name="college" placeholder="e.g. DBATU Lonere - Computer Engineering Sem 3" />
+              <span class="field-error-msg"></span>
+            </label>
+          </div>
+
+          <!-- Conditional Business Field -->
+          <div id="business-field-group" class="field-group conditional-field">
+            <label>Business / Organization Name <span class="req">*</span>
+              <input name="business" placeholder="e.g. Cafe Botanica, Spark Dental, etc." />
+              <span class="field-error-msg"></span>
+            </label>
+          </div>
+
+          <label>Which subjects or units do you need most? <span class="muted">(optional)</span>
+            <textarea name="message" rows="2" placeholder="e.g. Discrete Mathematics Unit 2, Operating Systems scheduling algorithms..."></textarea>
+          </label>
+
+          <button class="button" type="submit">Join notes update list <span>↗</span></button>
+          <p class="form-message" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="index.html"><span class="brand-symbol">A</span><span data-config="brandName">ASCEND<span class="muted">LABS</span></span></a>
+      <p>Learn. Build. Lead.</p>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="internship.html">Internship</a>
+        <a href="campus-ambassador.html">Ambassadors</a>
+        <a href="web-development.html">Web Builds</a>
+        <a href="engineering-notes.html">Notes Hub</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+      <p class="footer-note" data-config="legalNotice">Working brand identity - final legal company name to be confirmed during registration.</p>
+      <a href="#main" class="back-top">BACK TO TOP ↑</a>
+    </footer>
+
+    <script src="site-config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
